@@ -1,4 +1,4 @@
-#summary ow to use Sqlite database with Hibernate quickly in JAVA!
+#summary How to use Sqlite database with Hibernate quickly in JAVA!
 #labels Featured,Phase-Implementation,Phase-Deploy
 
 = Introduction =
