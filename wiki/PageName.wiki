@@ -1,0 +1,190 @@
+#summary One-sentence summary of this page.
+#labels Featured,Phase-Implementation,Phase-Deploy
+
+= Introduction =
+
+How to use Sqlite database with Hibernate quickly in JAVA!
+
+
+= Details =
+
+=Download=
+1.[http://hibernate-sqlite.googlecode.com/files/HibernateSQLite.rar]<br>
+No referenced jars included, built it with maven2 and then import into eclipse.(12.7K)<br>
+2.[http://hibernate-sqlite.googlecode.com/files/HibernateSQLite_with_jar.rar]<br>
+Referenced jars included,import it into eclipse directly!(5.8M)
+=SQLite with Hibernate=
+Since SQLite database is widely used and it is not well supported by Hibernate(not NHibernate) in java,it's not easy to use SQLite with Hibernate.This project is to help you quickly start with SQLite-Hibernate programming.
+
+----
+
+=Guide to quickly start with the demo project=
+==1.Download the HibernateSQLite Project==
+HibernateSQLite Project,download it here:
+[http://hibernate-sqlite.googlecode.com/files/HibernateSQLite.rar],then go to the second step.<br>
+If you don't want to build it,download it here:
+[http://hibernate-sqlite.googlecode.com/files/HibernateSQLite_with_jar.rar], go to the third step directly.
+==2.Build the project with Maven2==
+After you have Unziped it, use maven2 to build the project. If you haven't installed Maven2, go to [http://maven.apache.org/download.html] to download one and install it.Then,Enter the project folder in command window, such as:
+{{{
+C:\Documents and Settings\Administrator>f:
+
+F:\>cd work
+
+F:\work>cd workspace
+
+F:\work\workspace>cd HibernateSQLite
+
+F:\work\workspace\HibernateSQLite>
+}}}
+execute the maven2 command "mvn eclipse:clean", like this:
+{{{
+F:\work\workspace\HibernateSQLite>mvn eclipse:clean
+}}}
+after you have cleaned the project, execute the command "mvn eclipse:eclipse", like this:
+{{{
+F:\work\workspace\HibernateSQLite>mvn eclipse:eclipse
+}}}
+if the command window displays like this:
+{{{
+[INFO] ------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] ------------------------------------------
+[INFO] Total time: 6 seconds
+[INFO] Finished at: Fri Jan 02 20:49:32 CST 2009
+[INFO] Final Memory: 6M/11M
+[INFO] ------------------------------------------
+}}}
+then the project is build sucessfully.
+==3.Import the project into Eclipse==
+In Eclipse, choose "Import --> Existing Projects into Workspace", browse the demo project folder and click "OK", then choose "HibernateSQLite", and the demo project is successfully imported into eclipse workspace.
+==4.Test the demo project is working well==
+Run the Junit TestCase "TestSaveUser.java" under package "test" to test if the project works well.The propose result is:
+{{{
+Hibernate: 
+    insert 
+    into
+        users
+        (name, password) 
+    values
+        (?, ?)
+Hibernate: 
+    select
+        last_insert_rowid()
+}}}
+if so,the demo is already working well.With this demo, you can easyly produce code using SQLite DataBase with Hibernate.
+----
+=Introduction of Demo Project=
+==1.Catalog==
+{{{
+HibernateSQLite
+|-- pom.xml
+`-- src
+    |-- main
+    |   |-- java
+    |   |   |-- dialect
+    |   |   |   `-- SQLiteDialect.java
+    |   |   |-- model
+    |   |   |   `-- User.java
+    |   |   `-- util
+    |   |       `-- HibernateUtil.java
+    |   |
+    |   |
+    |   `-- resources
+    |       |-- hibernate.cfg.xml
+    |       |-- log4j.properties
+    |       `-- User.hbm.xml
+    |
+    `-- test
+        `-- java
+            `-- test
+                `-- TestSaveUser.java
+}}}
+==2.Referenced Jars==
+pom.xml
+{{{
+	<dependencies>
+		<!-- Junit Test -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.5</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- Hibernate -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate</artifactId>
+			<version>3.2.6.ga</version>
+		</dependency>
+		<dependency>
+			<groupId>antlr</groupId>
+			<artifactId>antlr</artifactId>
+			<version>2.7.6</version>
+		</dependency>
+		<dependency>
+			<groupId>asm</groupId>
+			<artifactId>asm</artifactId>
+			<version>1.5.3</version>
+		</dependency>
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>2.1_3</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.9</version>
+		</dependency>
+		<dependency>
+			<groupId>ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+		<dependency>
+		<groupId>javax.transaction</groupId>
+		<artifactId>jta</artifactId>
+		<version>1.1</version>
+		</dependency>
+		
+		<!-- SQLite database JDBC -->
+		<dependency>
+			<groupId>org.xerial</groupId>
+			<artifactId>sqlite-jdbc</artifactId>
+			<version>3.6.0</version>
+		</dependency>
+	</dependencies>
+}}}
+==3.Usage==
+|| *Java File* || *Usage* ||
+||SQLiteDialect.java||the dialect for SQLite DataBase||
+||User.java||a model class for test||
+||HibernateUtil.java||a tool class for Hibernate use||
+|| *Resource File* || *Usage* ||
+||hibernate.cfg.xml||the configuation file for hibernate||
+||log4j.properties||the log configuation file for the project||
+||User.hbm.xml||the hibernate mapping file for User class||
+|| *Test File* || *Usage* ||
+||TestSaveUser.java||a testcase save an object into the SQLite DataBase with Hibernate||
