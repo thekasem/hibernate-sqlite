@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+
+<faces-config version="1.2" 
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+
+	<!-- managed beans of the simple hello world app -->
+	<managed-bean>
+		<managed-bean-name>user</managed-bean-name>
+		<managed-bean-class>model.User</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<!-- navigation rules for helloWorld.jsp -->
+	<navigation-rule>
+		<from-view-id>/login.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/main.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>failure</from-outcome>
+			<to-view-id>/failure.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>register</from-outcome>
+			<to-view-id>/register.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/register.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/login.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>exist</from-outcome>
+			<to-view-id>/exist.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>failure</from-outcome>
+			<to-view-id>/regfailure.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+</faces-config>
